@@ -154,19 +154,70 @@ void example2()
 
 int main()
 {
-	example1();
-	example2();
+	//	example1();
+	//	example2();
 
+		/*
+		{
+			cout << endl << endl;
+
+			int arr[2000]{ 0 };
+			cout << endl << "Size in bytes of all array: " << sizeof(arr);
+			cout << endl << "Size in bytes of one element: " << sizeof(int);
+			cout << endl << "Number of elements in array: " << sizeof(arr) / sizeof(int);
+		}
+		*/
+
+	const int N = 10;
+	int a[N]{ 0 };
+
+
+	for (size_t i = 0; i < N; i++)
+	{
+		a[i] = rand() % 100;
+		cout << a[i] << '\t';
+	}
+
+	int temp;
+	/*
+	// bubble sort
+	for (size_t j = 0; j < N - 1; j++)
+	{
+		for (size_t i = 0; i < N - 1; i++)
+		{
+			if (a[i] > a[i + 1])
+			{
+				temp = a[i];
+				a[i] = a[i + 1];
+				a[i + 1] = temp;
+			}
+		}
+	}
+	*/
+
+	// selection sort
+	int indexMin = 0;
+	for (size_t j = 0; j < N; j++)
+	{
+		for (size_t i = j + 1; i < N; i++)
+		{
+			if (a[i] < a[indexMin])
+			{
+				indexMin = i;
+			}
+		}
+		temp = a[j];
+		a[j] = a[indexMin];
+		a[indexMin] = temp;
+	}
 
 	cout << endl << endl;
-
-	int arr[2000]{ 0 };
-	cout << endl << "Size in bytes of all array: " << sizeof(arr);
-	cout << endl << "Size in bytes of one element: " << sizeof(int);
-	cout << endl << "Number of elements in array: " << sizeof(arr) / sizeof(int);
+	for (size_t i = 0; i < N; i++)
+	{
+		cout << a[i] << '\t';
+	}
 
 	cout << endl << endl;
-
 	return 0;
 }
 
