@@ -6,6 +6,72 @@
 
 using namespace std;
 
+/// <summary>
+/// Declaration, filling, printing and sorting of static array
+/// </summary>
+void example0()
+{
+	const int N = 10;
+	int arr[N]{ 0 };
+
+	cout << endl << "Size in bytes of all array: " << sizeof(arr);
+	cout << endl << "Size in bytes of one element: " << sizeof(int);
+	cout << endl << "Number of elements in array: " << sizeof(arr) / sizeof(int);
+	cout << endl << arr;
+
+
+	for (size_t i = 0; i < N; i++)
+	{
+		arr[i] = rand() % 100;
+		cout << arr[i] << '\t';
+	}
+
+	int temp;
+	cout << endl << endl << "Bubble sort:" << endl;
+	for (size_t j = 0; j < N - 1; j++)
+	{
+		for (size_t i = 0; i < N - 1; i++)
+		{
+			if (arr[i] > arr[i + 1])
+			{
+				temp = arr[i];
+				arr[i] = arr[i + 1];
+				arr[i + 1] = temp;
+			}
+		}
+	}
+
+	for (size_t i = 0; i < N; i++)
+	{
+		cout << arr[i] << '\t';
+	}
+
+
+	cout << endl << endl << "Reversed selection sort:" << endl;
+	int indexMin = 0;
+	for (size_t j = 0; j < N; j++)
+	{
+		for (size_t i = j; i < N; i++)
+		{
+			if (arr[i] > arr[indexMin])
+			{
+				indexMin = i;
+			}
+		}
+		temp = arr[j];
+		arr[j] = arr[indexMin];
+		arr[indexMin] = temp;
+	}
+
+	for (size_t i = 0; i < N; i++)
+	{
+		cout << arr[i] << '\t';
+	}
+}
+
+/// <summary>
+/// Example of statistical processing of month teperatures using 1-dimensonal array
+/// </summary>
 void example1()
 {
 	const int N = 31;	// array length
@@ -15,8 +81,9 @@ void example1()
 	for (int day = 0; day < N; day++)
 	{
 		temperatures[day] = -2 + rand() % 23;
-		cout << "arr[" << day << "] = " << temperatures[day] << endl;
+		cout << "day[" << day << "] = " << temperatures[day] << (!(day % 2) ? '\t' : '\n');
 	}
+	cout << endl;
 
 	// finding of average value of array
 	float averageTemerature = 0;
@@ -48,7 +115,7 @@ void example1()
 
 	// coldest and hottest day of month, days with zero
 	int indexOfColdestDay = 0, indexOfHottestDay = 0, zeroDays = 0;
-	for (int day = 0; day < N; day++)
+	for (int day = 1; day < N; day++)
 	{
 		if (temperatures[day] < temperatures[indexOfColdestDay])
 		{
@@ -69,6 +136,9 @@ void example1()
 	cout << endl << "Days with ZERO is: " << zeroDays;
 }
 
+/// <summary>
+/// Example of array partial use for resizing of 1-dimensional array
+/// </summary>
 void example2()
 {
 	const int N = 10;			// array length
@@ -109,7 +179,7 @@ void example2()
 		cout << array[i] << '\t';
 	}
 
-	// Removing of the element
+	// Removing of an element
 	do
 	{
 		cout << endl << "Enter the position of the element to remove: ";
@@ -154,70 +224,14 @@ void example2()
 
 int main()
 {
-	//	example1();
-	//	example2();
-
-		/*
-		{
-			cout << endl << endl;
-
-			int arr[2000]{ 0 };
-			cout << endl << "Size in bytes of all array: " << sizeof(arr);
-			cout << endl << "Size in bytes of one element: " << sizeof(int);
-			cout << endl << "Number of elements in array: " << sizeof(arr) / sizeof(int);
-		}
-		*/
-
-	const int N = 10;
-	int a[N]{ 0 };
-
-
-	for (size_t i = 0; i < N; i++)
-	{
-		a[i] = rand() % 100;
-		cout << a[i] << '\t';
-	}
-
-	int temp;
-	/*
-	// bubble sort
-	for (size_t j = 0; j < N - 1; j++)
-	{
-		for (size_t i = 0; i < N - 1; i++)
-		{
-			if (a[i] > a[i + 1])
-			{
-				temp = a[i];
-				a[i] = a[i + 1];
-				a[i + 1] = temp;
-			}
-		}
-	}
-	*/
-
-	// selection sort
-	int indexMin = 0;
-	for (size_t j = 0; j < N; j++)
-	{
-		for (size_t i = j + 1; i < N; i++)
-		{
-			if (a[i] < a[indexMin])
-			{
-				indexMin = i;
-			}
-		}
-		temp = a[j];
-		a[j] = a[indexMin];
-		a[indexMin] = temp;
-	}
+	example0();
 
 	cout << endl << endl;
-	for (size_t i = 0; i < N; i++)
-	{
-		cout << a[i] << '\t';
-	}
+	example1();
+
+	cout << endl << endl;
+	example2();
 
 	cout << endl << endl;
 	return 0;
 }
-
