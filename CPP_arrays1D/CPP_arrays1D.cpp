@@ -137,6 +137,58 @@ void example1()
 }
 
 /// <summary>
+/// Removing of an element
+/// </summary>
+/// <param name="array"></param>
+/// <param name="SIZE"></param>
+void printArray(const int array[], const int SIZE)
+{
+	for (int i = 0; i < SIZE; i++)
+	{
+		cout << setw(5) << array[i];
+	}
+}
+
+/// <summary>
+/// Removing of all negative elements
+/// </summary>
+/// <param name="array"></param>
+/// <param name="usedElements"></param>
+void removingNegatives(int array[], int& usedElements)
+{
+	int negatives = 0;
+	for (int j = 0; j < usedElements; j++)
+	{
+		if (array[j] < 0)
+		{
+			for (int i = j; i < usedElements; i++)
+			{
+				array[i] = array[i + 1];
+			}
+			j--;
+			usedElements--;
+		}
+	}
+}
+
+/// <summary>
+/// Removing of element in array
+/// </summary>
+/// <param name="array">array</param>
+/// <param name="usedElements">array size</param>
+/// <param name="k">number of element to remove</param>
+void removeElement(int array[], int& usedElements, const int k)
+{
+	for (int i = k - 1; i < usedElements; i++)
+	{
+		array[i] = array[i + 1];
+	}
+
+	array[usedElements] = 0;
+	usedElements--;
+}
+
+/// <summary>
 /// Example of array partial use for resizing of 1-dimensional array
 /// </summary>
 void example2()
@@ -150,10 +202,11 @@ void example2()
 	srand(time(0));
 	for (int i = 0; i < N; i++)
 	{
-		array[i] = 10 - rand() % 21;  // -10..+10
-		cout << array[i] << '\t';
+		array[i] = 10 - rand() % 21;  // -10..+10		
 	}
 
+	cout << endl;
+	printArray(array, usedElements);
 
 	// adding 1 element to array
 	do
@@ -174,10 +227,8 @@ void example2()
 	array[k - 1] = value;
 
 	cout << endl << "Array after adding of 1 element to position " << k << endl;
-	for (int i = 0; i < usedElements; i++)
-	{
-		cout << array[i] << '\t';
-	}
+	printArray(array, usedElements);
+
 
 	// Removing of an element
 	do
@@ -185,41 +236,14 @@ void example2()
 		cout << endl << "Enter the position of the element to remove: ";
 		cin >> k;
 	} while (k < 1 || k > usedElements);
-
-	for (int i = k - 1; i < usedElements; i++)
-	{
-		array[i] = array[i + 1];
-	}
-
-	array[usedElements] = 0;
-	usedElements--;
-
+	removeElement(array, usedElements, k);
 	cout << endl << "Array after removing of 1 element at position " << k << endl;
-	for (int i = 0; i < usedElements; i++)
-	{
-		cout << array[i] << '\t';
-	}
+	printArray(array, usedElements);
 
 
-	// Removing of all negative elements
-	int negatives = 0;
-	for (int j = 0; j < usedElements; j++)
-	{
-		if (array[j] < 0)
-		{
-			for (int i = j; i < usedElements; i++)
-			{
-				array[i] = array[i + 1];
-			}
-			j--;
-			usedElements--;
-		}
-	}
+	removingNegatives(array, usedElements);
 	cout << endl << "Array after removing of negative elements:" << endl;
-	for (int i = 0; i < usedElements; i++)
-	{
-		cout << array[i] << '\t';
-	}
+	printArray(array, usedElements);
 }
 
 int main()
